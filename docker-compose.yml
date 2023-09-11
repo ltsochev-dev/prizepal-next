@@ -1,0 +1,28 @@
+version: "3.1"
+
+services:
+  prizepal:
+    image: ghcr.io/ltsochev-dev/prizepal-next:latest
+    container_name: prizepal_next
+    ports:
+      - 3000:3000
+    networks:
+      - krisinet
+    volumes:
+      - prizepal:/app
+    environment:
+      FACEBOOK_ID: ${FACEBOOK_ID}
+      FACEBOOK_SECRET: ${FACEBOOK_SECRET}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_URL: ${NEXTAUTH_URL}
+    env_file:
+      - .env
+    restart: always
+
+networks:
+  krisinet:
+    driver: bridge
+
+volumes:
+  prizepal:
+  db:
